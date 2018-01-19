@@ -12,12 +12,13 @@ from django.utils.crypto import get_random_string
 from django.utils.encoding import python_2_unicode_compatible
 
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.postgres.fields import JSONField
 
 from . import signals
 from .adapters import get_invitations_adapter
 from .app_settings import app_settings
 from .base_invitation import AbstractBaseInvitation
-
+from companies.models import Company
 
 @python_2_unicode_compatible
 class Invitation(AbstractBaseInvitation):
@@ -25,6 +26,8 @@ class Invitation(AbstractBaseInvitation):
                               max_length=app_settings.EMAIL_MAX_LENGTH)
     created = models.DateTimeField(verbose_name=_('created'),
                                    default=timezone.now)
+    company = models.ForeignKey(Company, related_name="projects_company", verbose_name=_(u"Firma"))
+    permissions = JSONField()
 
     @classmethod
     def create(cls, email, inviter=None, **kwargs):
