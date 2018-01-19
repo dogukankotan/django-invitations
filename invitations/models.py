@@ -27,7 +27,7 @@ class Invitation(AbstractBaseInvitation):
     created = models.DateTimeField(verbose_name=_('created'),
                                    default=timezone.now)
     company = models.ForeignKey(Company, related_name="invitation_company", verbose_name=_(u"Firma"), null=True)
-    permissions = JSONField()
+    permissions = JSONField(null=True)
 
     @classmethod
     def create(cls, email, inviter=None, **kwargs):
