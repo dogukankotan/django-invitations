@@ -26,7 +26,7 @@ class Invitation(AbstractBaseInvitation):
                               max_length=app_settings.EMAIL_MAX_LENGTH)
     created = models.DateTimeField(verbose_name=_('created'),
                                    default=timezone.now)
-    company = models.ForeignKey(Company, related_name="projects_company", verbose_name=_(u"Firma"))
+    company = models.ForeignKey(Company, related_name="invitation_company", verbose_name=_(u"Firma"))
     permissions = JSONField()
 
     @classmethod
