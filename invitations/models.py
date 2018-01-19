@@ -28,7 +28,8 @@ class Invitation(AbstractBaseInvitation):
                                    default=timezone.now)
     company = models.ForeignKey(Company, related_name="invitation_company", verbose_name=_(u"Firma"), null=True)
     permissions = JSONField(null=True)
-
+    superuser_status = models.BooleanField(default=False)
+    
     @classmethod
     def create(cls, email, inviter=None, **kwargs):
         key = get_random_string(64).lower()
