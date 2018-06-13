@@ -29,7 +29,7 @@ class Invitation(AbstractBaseInvitation):
     company = models.ForeignKey(Company, related_name="invitation_company", verbose_name=_(u"Firma"), null=True)
     permissions = JSONField(null=True)
     superuser_status = models.BooleanField(default=False)
-    employee_id = models.CharField(max_lenght=255, null=True)
+    employee_id = models.CharField(max_length=255, null=True)
 
     @classmethod
     def create(cls, email, inviter=None, **kwargs):
